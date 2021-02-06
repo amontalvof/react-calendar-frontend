@@ -5,6 +5,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Navbar } from '../ui/Navbar';
 import { CalendarEvent } from './CalendarEvent';
 import { useState } from 'react';
+import { CalendarModal } from './CalendarModal';
 
 // import { messages as espanolMessages } from '../helpers/calendar-messages-es';
 // import 'moment/locale/es'; // to put the dates of the moment in Spanish
@@ -75,6 +76,7 @@ export const CalendarScreen = () => {
                 components={{ event: CalendarEvent }}
                 // messages={espanolMessages}
             />
+            <CalendarModal />
         </div>
     );
 };
