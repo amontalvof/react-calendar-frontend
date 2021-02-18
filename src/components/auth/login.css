@@ -30,10 +30,12 @@
     border: none;
     cursor: pointer;
 }
+
 .login-form-1 .btnSubmit {
     color: #fff;
     background-color: #0062cc;
 }
+
 .login-form-2 .btnSubmit {
     background-color: #fff;
     color: #0062cc;

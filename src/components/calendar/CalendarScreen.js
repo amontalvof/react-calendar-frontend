@@ -12,7 +12,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { AddNewFab } from '../ui/AddNewFab';
 import { DeleteEventFab } from '../ui/DeleteEventFab';
 
-// import { messages as espanolMessages } from '../helpers/calendar-messages-es';
+// import { messages as espanolMessages } from '../../helpers/calendar-messages-es';
 // import 'moment/locale/es'; // to put the dates of the moment in Spanish
 // moment.locale('es'); // to put the dates of the moment in Spanish
 
