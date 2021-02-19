@@ -81,3 +81,12 @@ body {
     left: 25px;
     font-size: 16px;
 }
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: DodgerBlue;
+    color: white;
+}
