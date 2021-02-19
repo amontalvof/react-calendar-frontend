@@ -8,17 +8,17 @@ import './login.css';
 export const LoginScreen = () => {
     const dispatch = useDispatch();
     const [formLoginValues, handleLoginInputChange] = useForm({
-        loginEmail: 'fernando@gmail.com',
-        loginPassword: '123456',
+        loginEmail: '',
+        loginPassword: '',
     });
 
     const { loginEmail, loginPassword } = formLoginValues;
 
     const [formRegisterValues, handleRegisterInputChange] = useForm({
-        registerName: 'Nando',
-        registerEmail: 'nando@gmail.com',
-        registerPassword1: '123456',
-        registerPassword2: '123456',
+        registerName: '',
+        registerEmail: '',
+        registerPassword1: '',
+        registerPassword2: '',
     });
 
     const {
@@ -66,6 +66,9 @@ export const LoginScreen = () => {
                                 value={loginPassword}
                                 onChange={handleLoginInputChange}
                             />
+                            <p className="helpTextLogin">
+                                The password must be at least 6 characters long.
+                            </p>
                         </div>
                         <div className="form-group">
                             <input
@@ -120,6 +123,9 @@ export const LoginScreen = () => {
                                 value={registerPassword2}
                                 onChange={handleRegisterInputChange}
                             />
+                            <p className="helpTextRgister">
+                                The password must be at least 6 characters long.
+                            </p>
                         </div>
 
                         <div className="form-group">

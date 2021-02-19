@@ -50,3 +50,17 @@
     font-weight: 600;
     text-decoration: none;
 }
+
+.helpTextLogin,
+.helpTextRgister {
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.helpTextLogin {
+    color: gray;
+}
+
+.helpTextRgister {
+    color: #d9d9d9;
+}
