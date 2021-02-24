@@ -1,8 +1,9 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import Swal from 'sweetalert2';
-import { startLogin } from '../../actions/auth';
+import { startLogin, startRegister } from '../../actions/auth';
 import { types } from '../../types/types';
+import * as fetchModule from '../../helpers/fetch';
 
 jest.mock('sweetalert2', () => ({
     fire: jest.fn(),
@@ -56,6 +57,36 @@ describe('Tests on auth actions', () => {
             'Error!',
             'There is no user with that email.',
             'error'
+        );
+    });
+
+    test('startRegister should work', async () => {
+        fetchModule.fetchWithoutToken = jest.fn(() => ({
+            json() {
+                return {
+                    ok: true,
+                    uid: '123',
+                    name: 'test',
+                    token: 'abc123abc123',
+                };
+            },
+        }));
+        await store.dispatch(startRegister('test@gmail.com', '123456', 'Test'));
+        const actions = store.getActions();
+        expect(actions[0]).toEqual({
+            type: types.authLogin,
+            payload: {
+                uid: '123',
+                name: 'test',
+            },
+        });
+        expect(localStorage.setItem).toHaveBeenCalledWith(
+            'token',
+            'abc123abc123'
+        );
+        expect(localStorage.setItem).toHaveBeenCalledWith(
+            'token-init-time',
+            expect.any(Number)
         );
     });
 });
