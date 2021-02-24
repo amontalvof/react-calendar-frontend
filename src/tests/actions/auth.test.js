@@ -1,7 +1,7 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import Swal from 'sweetalert2';
-import { startLogin, startRegister } from '../../actions/auth';
+import { startChecking, startLogin, startRegister } from '../../actions/auth';
 import { types } from '../../types/types';
 import * as fetchModule from '../../helpers/fetch';
 
@@ -13,6 +13,7 @@ const mockStore = configureStore(middlewares);
 const initState = {};
 let store = mockStore(initState);
 Storage.prototype.setItem = jest.fn();
+let token = '';
 
 describe('Tests on auth actions', () => {
     beforeEach(() => {
@@ -39,7 +40,7 @@ describe('Tests on auth actions', () => {
             expect.any(Number)
         );
 
-        // const token = localStorage.setItem.mock.calls[0][1];
+        token = localStorage.setItem.mock.calls[0][1];
     });
 
     test('startLogin should not work with wrong credentials', async () => {
@@ -87,6 +88,32 @@ describe('Tests on auth actions', () => {
         expect(localStorage.setItem).toHaveBeenCalledWith(
             'token-init-time',
             expect.any(Number)
+        );
+    });
+
+    test('startChecking should work', async () => {
+        fetchModule.fetchWithToken = jest.fn(() => ({
+            json() {
+                return {
+                    ok: true,
+                    uid: '123',
+                    name: 'test',
+                    token: 'abc123abc123',
+                };
+            },
+        }));
+        await store.dispatch(startChecking());
+        const actions = store.getActions();
+        expect(actions[0]).toEqual({
+            type: types.authLogin,
+            payload: {
+                uid: '123',
+                name: 'test',
+            },
+        });
+        expect(localStorage.setItem).toHaveBeenCalledWith(
+            'token',
+            'abc123abc123'
         );
     });
 });
